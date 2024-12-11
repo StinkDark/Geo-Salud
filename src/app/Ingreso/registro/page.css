@@ -1,0 +1,77 @@
+/* Sección EPS */
+.eps-section {
+    padding: 1rem;
+    background-color: #eaf7fa;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* EPS individuales */
+.eps-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #e1f7fa;
+    padding: 8px 12px;
+    margin: 6px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #007bb5;
+    transition: all 0.2s ease;
+    width: 90%;
+    max-width: 400px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Hover en EPS individuales */
+.eps-item:hover {
+    background-color: #b3ebf7;
+}
+
+/* Botón eliminar EPS */
+.eps-item button {
+    background-color: transparent;
+    border: none;
+    color: #d32f2f;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 18px;
+}
+
+/* Botón eliminar EPS hover */
+.eps-item button:hover {
+    text-decoration: underline;
+}
+
+/* Asegurarse de orden visual */
+.eps-item span {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 8px;
+    text-align: left;
+}
+
+/* Botón añadir EPS */
+button[type="button"] {
+    background-color: #e7f3fe;
+    color: #0070f3;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+/* Hover en el botón añadir EPS */
+button[type="button"]:hover {
+    background-color: #d6f6ff;
+}

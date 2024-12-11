@@ -1,0 +1,55 @@
+
+.navbar-container {
+    background-color: #0077b6;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px;
+}
+
+.navbar-container a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.navbar-container a:hover {
+    background-color: #005f99;
+}
+
+/* Contenido principal */
+.main-content {
+    max-width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Espacios y textos uniformes */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+}
+
+p, h1, h2 {
+    font-weight: 500;
+}
+
+
+.btn {
+    background: #0077b6;
+    color: black;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #005f99;
+}

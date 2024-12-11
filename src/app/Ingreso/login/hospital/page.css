@@ -1,0 +1,71 @@
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    height: 100vh;
+    background: linear-gradient(to bottom, #0077b6, #f4f4f9);
+    font-family: 'Roboto', Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Formulario del hospital */
+.login-container form {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Título del login Hospital */
+.login-container form h2 {
+    font-weight: bold;
+    color: #0077b6;
+}
+
+/* Inputs y Botones */
+.login-container input[type="text"],
+.login-container input[type="password"],
+.login-container button {
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+/* Botón principal */
+.login-container button {
+    background-color: #0077b6;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Hover del botón */
+.login-container button:hover {
+    background-color: #005f9e;
+}
+
+/* Enlace de recuperación */
+.login-container p a {
+    color: #0077b6;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-container p a:hover {
+    text-decoration: underline;
+}
+
+/* Mensaje de error */
+.login-container .error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
