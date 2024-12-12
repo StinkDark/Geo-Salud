@@ -1,0 +1,169 @@
+/* General */
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Principal */
+div {
+    padding: 20px;
+    background-color: #e9f7fa;
+    margin: 10px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+div:hover {
+    transform: scale(1.05);
+}
+
+/* Heading (h2) */
+h2 {
+    font-size: 2rem;
+    color: #0077b6;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Párrafos */
+p {
+    font-weight: bold;
+    font-size: 18px;
+    color: #004d40;
+    line-height: 1.6;
+}
+
+/* Fact Card */
+.fact-card {
+    padding: 20px;
+    text-align: center;
+    background: #e7f3fe;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.3);
+    animation: popIn 1s ease-in;
+    margin-top: 15px;
+}
+
+.fact-card h2 {
+    font-size: 1.6rem;
+    color: #0077b6;
+}
+
+.fact-card p {
+    font-size: 1.2rem;
+    color: #004e61;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Map Section */
+.map-section {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.map-section img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    padding: 5px;
+    background: #fff;
+}
+
+.map-section img:hover {
+    transform: scale(1.05);
+}
+
+.map-section p {
+    font-weight: bold;
+    color: #555;
+    margin-top: 10px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    padding: 50px;
+    background: linear-gradient(135deg, #0077b6, #00bcd4);
+    color: #fff;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    animation: fadeIn 1.5s ease;
+}
+
+.welcome-section h1 {
+    font-weight: bold;
+    font-size: 2.2rem;
+    margin: 0;
+}
+
+.welcome-section p {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+/* Buttons */
+button {
+    background-color: #0077b6;
+    color: #fff;
+    padding: 15px 30px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    font-family: 'Roboto', Arial;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: #0097a7;
+}
+
+/* Links */
+a {
+    color: #00acc1;
+    text-decoration: none;
+    font-weight: bold;
+    transition: text-decoration 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}

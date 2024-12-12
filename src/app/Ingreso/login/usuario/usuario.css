@@ -1,3 +1,4 @@
+
 /* Contenedor principal */
 .usuario-container {
     max-width: 400px;
@@ -11,6 +12,8 @@
     animation: fadeInUsuario 1s ease-in;
 }
 
+
+
 /* Título */
 .usuario-container h2 {
     font-size: 2rem;
@@ -19,12 +22,14 @@
     margin-bottom: 20px;
 }
 
-/* Inputs y botón */
+
+/* Inputs y botones */
 .usuario-container input[type="text"],
 .usuario-container input[type="password"],
 .usuario-container button {
     width: 100%;
-    padding: 15px;
+    padding: 10px;
+
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 16px;
@@ -32,7 +37,7 @@
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Inputs */
+/* Inputs en foco */
 .usuario-container input[type="text"]:focus,
 .usuario-container input[type="password"]:focus {
     border-color: #0077b6;
@@ -59,12 +64,12 @@
     transform: scale(0.95);
 }
 
-/* Mensaje de error */
 .usuario-container .error {
     color: #d32f2f;
     font-weight: bold;
     margin-bottom: 10px;
 }
+
 
 /* Enlaces */
 .usuario-container p a {
@@ -79,7 +84,9 @@
     color: #005f9e;
 }
 
-/* Animaciones */
+
+
+/* Animación de fadeIn */
 @keyframes fadeInUsuario {
     from {
         opacity: 0;
