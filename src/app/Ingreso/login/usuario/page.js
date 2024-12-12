@@ -1,6 +1,8 @@
 'use client';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ref, get } from "firebase/database";
+import { database } from "@/config/firebase";
 import "./page.css";
 
 const LoginUsuario = () => {
@@ -9,7 +11,7 @@ const LoginUsuario = () => {
     const [error, setError] = useState("");
     const router = useRouter();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!nombre || !eps) {
@@ -17,51 +19,60 @@ const LoginUsuario = () => {
             return;
         }
 
-      
-        alert("Inicio de sesión exitoso");
-        setError("");
+        try {
+            // Buscar hospitales en la base de datos que correspondan a la EPS ingresada
+            const refHospitales = ref(database, "hospitales");
+            const snapshot = await get(refHospitales);
 
-       
-        router.push("/inicio");
+            if (snapshot.exists()) {
+                const hospitales = snapshot.val();
+
+                const hospitalesParaEPS = Object.values(hospitales).filter(
+                    (hospital) => hospital.epsAtendidas?.includes(eps)
+                );
+
+                if (hospitalesParaEPS.length > 0) {
+                    // Guardar la información en sessionStorage
+                    sessionStorage.setItem("nombreUsuario", nombre);
+                    sessionStorage.setItem("epsUsuario", eps);
+
+                    alert("Inicio de sesión exitoso");
+
+                    router.push("/inicio/usuarios");
+                } else {
+                    setError("No se encontraron hospitales para tu EPS.");
+                }
+            }
+        } catch (error) {
+            console.error("Error al verificar datos:", error);
+            setError("Hubo un error al conectar con la base de datos.");
+        }
     };
 
     return (
         <div className="usuario-container">
             <form onSubmit={handleSubmit}>
-                <h2>Bienvenido a GeoSalud</h2>
-                <p>Por favor, inicia sesión para obtener información sobre los hospitales que atienden tu EPS.</p>
+                <h2>Inicio de Sesión en GeoSalud</h2>
 
                 {error && <p className="error">{error}</p>}
 
-                <div className="input-group">
-                    <i className="fas fa-user"></i>
-                    <input
-                        type="text"
-                        placeholder="Ingresa tu nombre"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                        required
-                    />
-                </div>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                    required
+                />
+                
+                <input
+                    type="text"
+                    placeholder="Nombre EPS"
+                    value={eps}
+                    onChange={(e) => setEps(e.target.value)}
+                    required
+                />
 
-                <div className="input-group">
-                    <i className="hospital"></i>
-                    <input
-                        type="text"
-                        placeholder="Nombre de tu EPS"
-                        value={eps}
-                        onChange={(e) => setEps(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <button type="submit">
-                    <i className="inicio"></i> Iniciar sesión
-                </button>
-
-                <p>
-                    ¿No tienes cuenta? <a href="/registro">Regístrate aquí</a>
-                </p>
+                <button type="submit">Iniciar Sesión</button>
             </form>
         </div>
     );
