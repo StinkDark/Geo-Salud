@@ -1,97 +1,116 @@
-'use client';  // Activa el componente como cliente en Next.js, necesario para hooks y navegación.
+'use client';
 
-import { useState } from "react";  // Importa el hook `useState` para manejar el estado del formulario.
-import { ref, get } from "firebase/database";  // Importa las funciones de Firebase para acceder a la base de datos.
-import { database } from "@/config/firebase";  // Importa la configuración de Firebase.
-import { useRouter } from "next/navigation";  // Importa el hook `useRouter` para la navegación en Next.js.
-import "./hospital.css";  // Importa el archivo CSS para estilizar el componente.
+import { useState } from "react";
+import { ref, get } from "firebase/database";
+import { database } from "@/config/firebase";
+import { useRouter } from "next/navigation";
+import "./page.css"
 
 const LoginHospital = () => {
-    // Declaración de estados para manejar el valor de los campos del formulario.
-    const [nit, setNit] = useState("");  // Estado para el NIT del hospital.
-    const [documento, setDocumento] = useState("");  // Estado para el número de documento del responsable.
-    const [contrasena, setContrasena] = useState("");  // Estado para la contraseña del hospital.
-    const router = useRouter();  // Hook para redirigir al usuario dentro de Next.js.
+  const [nit, setNit] = useState("");
+  const [documento, setDocumento] = useState("");
+  const [contrasena, setContrasena] = useState("");
+  const router = useRouter();
 
-    // Función que maneja el envío del formulario.
-    const handleSubmit = async (e) => {
-        e.preventDefault();  // Previene el comportamiento predeterminado del formulario HTML.
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            // Referencia a la base de datos de Firebase para acceder al hospital con el NIT ingresado.
-            const hospitalRef = ref(database, `hospitales/${nit}`);
-            const snapshot = await get(hospitalRef);
+    try {
+      const hospitalRef = ref(database, `hospitales/${nit}`);
+      const snapshot = await get(hospitalRef);
 
-            if (snapshot.exists()) {
-                const datosHospital = snapshot.val();  // Obtiene los datos del hospital desde Firebase.
+      if (snapshot.exists()) {
+        const datosHospital = snapshot.val();
 
-                console.log("Datos recuperados desde Firebase:", datosHospital);
-
-                // Verifica si el documento y la contraseña coinciden con los datos del hospital.
-                if (
-                    String(datosHospital.responsable.documento).trim() === String(documento).trim() &&
-                    String(datosHospital.responsable.contrasena).trim() === String(contrasena).trim()
-                ) {
-                    alert("Inicio de sesión exitoso");
-
-                    // Guarda el NIT del hospital en sessionStorage para mantener la sesión activa.
-                    sessionStorage.setItem("nombreHospital", nit);
-
-                    // Redirecciona al hospital a la página de inicio después del inicio de sesión.
-                    router.push("/inicio/hospital");
-                } else {
-                    alert("Contraseña o documento incorrecto");
-                }
-            } else {
-                alert("Hospital no encontrado en el sistema");  // Notifica si el hospital no existe en la base de datos.
-            }
-        } catch (err) {
-            console.error("Error al recuperar datos:", err);
-            alert("Hubo un error al iniciar sesión");  // Muestra un mensaje de error si falla la solicitud.
+        if (
+          String(datosHospital.responsable.documento).trim() === String(documento).trim() &&
+          String(datosHospital.responsable.contrasena).trim() === String(contrasena).trim()
+        ) {
+          alert("Inicio de sesión exitoso");
+          sessionStorage.setItem("nombreHospital", nit);
+          router.push("/inicio/hospital");
+        } else {
+          alert("Contraseña o documento incorrecto");
         }
-    };
+      } else {
+        alert("Hospital no encontrado en el sistema");
+      }
+    } catch (err) {
+      console.error("Error al recuperar datos:", err);
+      alert("Hubo un error al iniciar sesión");
+    }
+  };
 
-    return (
-        <div className="login-container">
-            <h2>Iniciar Sesión Hospital</h2>
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg p-12 w-full max-w-6xl mx-4 transform transition-all hover:scale-105">
+        <h2 className="text-4xl font-bold text-gray-900 mb-6 text-center">
+          🚀 Iniciar Sesión Hospital
+        </h2>
 
-            {/* Formulario para el inicio de sesión del hospital */}
-            <form onSubmit={handleSubmit}>
-                <label>NIT del Hospital</label>
-                <input
-                    placeholder="Ingrese el NIT del hospital"
-                    value={nit}
-                    onChange={(e) => setNit(e.target.value)}
-                    required
-                />
-                
-                <label>Número de Documento</label>
-                <input
-                    placeholder="Número del documento"
-                    value={documento}
-                    onChange={(e) => setDocumento(e.target.value)}
-                    type="text"
-                    required
-                />
-                
-                <label>Contraseña</label>
-                <input
-                    placeholder="Contraseña"
-                    value={contrasena}
-                    onChange={(e) => setContrasena(e.target.value)}
-                    type="password"
-                    required
-                />
+        {/* Formulario en Distribución Horizontal */}
+        <form onSubmit={handleSubmit} className="flex flex-wrap items-center justify-between space-y-4 md:space-y-0">
+          {/* NIT Hospital */}
+          <input
+            type="text"
+            placeholder="NIT del Hospital"
+            value={nit}
+            onChange={(e) => setNit(e.target.value)}
+            required
+            className="w-1/3 md:w-1/4 px-5 py-3 rounded-lg border bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-                <button type="submit">Iniciar Sesión</button>  {/* Botón para enviar el formulario */}
-            </form>
+          {/* Número del Responsable */}
+          <input
+            type="text"
+            placeholder="Número del Responsable"
+            value={documento}
+            onChange={(e) => setDocumento(e.target.value)}
+            required
+            className="w-1/3 md:w-1/4 px-5 py-3 rounded-lg border bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
 
-            {/* Botón adicional para redirigir al formulario de registro de hospitales */}
-            <button onClick={() => router.push('/Ingreso/registro')}>
-                Registrar Hospital
-            </button>
+          {/* Contraseña */}
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={contrasena}
+            onChange={(e) => setContrasena(e.target.value)}
+            required
+            className="w-1/3 md:w-1/4 px-5 py-3 rounded-lg border bg-gray-50 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+
+          {/* Botón de Iniciar Sesión */}
+          <button
+            type="submit"
+            className="mt-6 w-full md:w-auto bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+          >
+            🔥 Iniciar Sesión
+          </button>
+
+          {/* Botón para Registrar Hospital */}
+          <button
+            type="button"
+            onClick={() => router.push('/Ingreso/registro')}
+            className="w-full md:w-auto mt-4 bg-gray-300 text-gray-900 font-semibold py-3 rounded-lg shadow hover:bg-gray-400 transition"
+          >
+            📜 Registrar Hospital
+          </button>
+        </form>
+
+        {/* Información Adicional */}
+        <div className="mt-8 bg-gray-50 rounded-lg p-4 text-center">
+          <p className="text-gray-600">
+            ⚠️ Mantenga sus datos actualizados para asegurar el acceso continuo al sistema.
+          </p>
         </div>
-    );
+
+        <p className="mt-6 text-center text-gray-500">
+          © {new Date().getFullYear()} GeoSalud. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default LoginHospital;

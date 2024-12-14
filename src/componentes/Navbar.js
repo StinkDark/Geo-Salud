@@ -1,20 +1,15 @@
 'use client';
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ref, onValue } from "firebase/database";
+import { database } from "@/config/firebase";
 import './Navbar.css';
 
 const Navbar = () => {
-    // Estados para manejar el dropdown de "Ingreso" y "Aliados"
     const [dropdownIngreso, setDropdownIngreso] = useState(false);
     const [dropdownAliados, setDropdownAliados] = useState(false);
-
-    // EPS manuales agregadas temporalmente mientras no estén en Firebase
-    const eps = [
-        { nombre: "SANITAS" },
-        { nombre: "SURA" },
-        { nombre: "MUTUAL SER" }
-    ];
+    const [eps, setEps] = useState([]);
 
     // Función para alternar el dropdown
     const toggleDropdown = (type) => {
@@ -27,10 +22,30 @@ const Navbar = () => {
         }
     };
 
+    // Obtener EPS desde Firebase en tiempo real
+    useEffect(() => {
+        const refHospitales = ref(database, "hospitales");
+
+        const unsubscribe = onValue(refHospitales, (snapshot) => {
+            if (snapshot.exists()) {
+                const datosHospitales = snapshot.val();
+
+                // Obtener EPS únicas desde hospitales
+                const epsUnicas = new Set();
+                Object.values(datosHospitales).forEach(hospital => {
+                    hospital.epsAtendidas?.forEach(eps => epsUnicas.add(eps));
+                });
+
+                setEps(Array.from(epsUnicas));
+            }
+        });
+
+        return () => unsubscribe();
+    }, []);
+
     return (
         <nav className="navbar-container">
             <ul>
-                {/* Enlace principal a la página de inicio */}
                 <li><Link href="/">Geosalud</Link></li>
 
                 {/* Dropdown de "Ingreso" */}
@@ -61,11 +76,10 @@ const Navbar = () => {
                     {dropdownAliados && (
                         <div className="dropdown-content">
                             {eps.length > 0 ? (
-                                // Mapea el array de EPS manuales para crear enlaces dinámicamente
                                 eps.map((epsItem, index) => (
-                                    <Link key={index} href={`/nuestros-aliados/${epsItem.nombre}`}>
-                                        {epsItem.nombre}
-                                    </Link>
+                                    <div key={index} className="eps-info">
+                                        <p><strong>EPS:</strong> {epsItem}</p>
+                                    </div>
                                 ))
                             ) : (
                                 <p>Cargando Aliados...</p>

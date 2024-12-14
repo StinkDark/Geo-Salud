@@ -1,87 +1,164 @@
-// Activa el componente en el cliente
 'use client';
 
-import { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database";
+import { useState, useEffect } from "react";
+import { ref, get, onValue } from "firebase/database";
 import { database } from "@/config/firebase";
-import { useRouter } from "next/navigation";
-import "./usuario-inicio.css";
 
-// Componente principal para mostrar la información de usuarios y hospitales disponibles
-const InicioUsuarios = () => {
-    // `useRouter` para manejar la navegación entre páginas
-    const router = useRouter(); 
+const InicioUsuario = () => {
+  const [epsSeleccionada, setEpsSeleccionada] = useState("");
+  const [hospitales, setHospitales] = useState([]);
+  const [epsDisponibles, setEpsDisponibles] = useState([]);
+  const [mostrarMapa, setMostrarMapa] = useState(null);
+  const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
-    // Estado para almacenar el nombre del usuario
-    const [nombreUsuario, setNombreUsuario] = useState("");
-    // Estado para almacenar la EPS a la que pertenece el usuario
-    const [epsUsuario, setEpsUsuario] = useState("");
-    // Estado para almacenar la lista de hospitales disponibles
-    const [hospitales, setHospitales] = useState([]);
+  // Obtener hospitales para la EPS seleccionada
+  const obtenerHospitalesPorEps = async (eps) => {
+    try {
+      const refHospitales = ref(database, "hospitales");
+      const snapshot = await get(refHospitales);
 
-    // Hook `useEffect` para cargar datos y suscribirse a la base de datos Firebase al montar el componente
-    useEffect(() => {
-        // Obtiene el nombre y la EPS del usuario desde el almacenamiento de sesión
-        const nombre = sessionStorage.getItem("nombreUsuario");
-        const eps = sessionStorage.getItem("epsUsuario");
+      if (snapshot.exists()) {
+        const datosHospitales = snapshot.val();
 
-        if (nombre && eps) {
-            // Si el nombre y la EPS existen, actualiza el estado
-            setNombreUsuario(nombre);
-            setEpsUsuario(eps);
+        const hospitalesAtendidos = Object.values(datosHospitales).filter(hospital =>
+          hospital.epsAtendidas?.includes(eps)
+        );
 
-            // Obtiene la referencia a la base de datos en Firebase para obtener información de hospitales
-            const refHospitales = ref(database, "hospitales");
+        const hospitalesConCoordenadas = await Promise.all(
+          hospitalesAtendidos.map(async (hospital) => {
+            const coordenadas = await obtenerCoordenadasDesdeDireccion(hospital.direccion);
 
-            // Suscripción en tiempo real para obtener actualizaciones de datos de hospitales
-            const unsubscribe = onValue(refHospitales, (snapshot) => {
-                const hospitalesData = snapshot.val();
+            return {
+              ...hospital,
+              coordenadas
+            };
+          })
+        );
 
-                // Filtra hospitales basados en la EPS a la que el usuario pertenece
-                const hospitalesParaEPS = Object.values(hospitalesData).filter(
-                    (hospital) => hospital.epsAtendidas?.includes(eps)
-                );
+        setHospitales(hospitalesConCoordenadas);
+      }
+    } catch (error) {
+      console.error("Error al obtener hospitales:", error);
+    }
+  };
 
-                // Actualiza el estado con hospitales disponibles para la EPS del usuario
-                setHospitales(hospitalesParaEPS);
-            });
+  const handleEpsChange = (e) => {
+    const eps = e.target.value;
+    setEpsSeleccionada(eps);
+    obtenerHospitalesPorEps(eps);
+  };
 
-            // Limpia la suscripción cuando el componente se desmonta
-            return () => unsubscribe(); 
-        } else {
-            // Si no existe información en el almacenamiento de sesión, redirecciona al login del usuario
-            router.push('/LoginUsuario'); 
-        }
-    }, [router]);
+  // Obtener coordenadas usando la API de Google Maps
+  const obtenerCoordenadasDesdeDireccion = async (direccion) => {
+    try {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(direccion)}&key=${googleApiKey}`
+      );
+      const data = await response.json();
 
-    return (
-        <div>
-            <h1>Inicio</h1>
+      if (data.results && data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry.location;
+        return { lat, lng };
+      } else {
+        console.error(`No se encontraron coordenadas para la dirección: ${direccion}`);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error al obtener coordenadas:", error);
+      return null;
+    }
+  };
 
-            {/* Muestra el nombre del usuario si está disponible */}
-            {nombreUsuario && <p><strong>Hola, {nombreUsuario}</strong></p>}
-            {epsUsuario && <p><strong>Tu EPS:</strong> {epsUsuario}</p>}
+  const generarUrlMapa = (hospital) => {
+    return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${hospital.coordenadas?.lat},${hospital.coordenadas?.lng}`;
+  };
 
-            <h2>Hospitales Disponibles</h2>
+  const handleMostrarMapa = (documento) => {
+    setMostrarMapa(prevEstado => prevEstado === documento ? null : documento);
+  };
 
-            {/* Renderiza la lista de hospitales basados en la EPS del usuario */}
-            {hospitales.length > 0 ? (
-                hospitales.map((hospital, idx) => (
-                    <div key={idx}>
-                        {/* Muestra el nombre del hospital */}
-                        <p><strong>Nombre Hospital:</strong> {hospital.nombre}</p>
-                        {/* Muestra la dirección del hospital */}
-                        <p><strong>Dirección:</strong> {hospital.direccion}</p>
-                        {/* Muestra la capacidad de urgencias del hospital */}
-                        <p><strong>Capacidad de Urgencias:</strong> {hospital.capacidadUrgencias}</p>
-                    </div>
-                ))
-            ) : (
-                // Mensaje en caso de no encontrar hospitales para la EPS
-                <p>No se encontraron hospitales para tu EPS.</p>
-            )}
-        </div>
-    );
+  // Escuchar cambios en tiempo real en la base de datos para EPS
+  useEffect(() => {
+    const refHospitales = ref(database, "hospitales");
+
+    const unsubscribe = onValue(refHospitales, (snapshot) => {
+      if (snapshot.exists()) {
+        const datosHospitales = snapshot.val();
+
+        // Obtener todas las EPS únicas desde los hospitales
+        const epsUnicas = new Set();
+        Object.values(datosHospitales).forEach(hospital => {
+          hospital.epsAtendidas?.forEach(eps => epsUnicas.add(eps));
+        });
+
+        setEpsDisponibles(Array.from(epsUnicas));
+      }
+    });
+
+    // Cleanup listener al desmontar el componente
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <div>
+      <h2>Selecciona tu EPS</h2>
+
+      {/* Selector de EPS dinámico */}
+      <label>
+        <strong>EPS:</strong>
+        <select onChange={handleEpsChange} value={epsSeleccionada}>
+          <option value="" disabled>Selecciona tu EPS</option>
+          {epsDisponibles.map(eps => (
+            <option key={eps} value={eps}>{eps}</option>
+          ))}
+        </select>
+      </label>
+
+      {/* Información de Hospitales */}
+      <div>
+        <h3>Información de Hospitales</h3>
+
+        {hospitales.length > 0 ? (
+          hospitales.map((hospital) => (
+            <div key={hospital.nit}>
+              <p><strong>Nombre:</strong> {hospital.nombre}</p>
+              <p><strong>Documento del Responsable:</strong> {hospital.responsable?.documento}</p>
+              <p><strong>Cargo:</strong> {hospital.responsable?.cargo}</p>
+              <p><strong>Dirección:</strong> {hospital.direccion}</p>
+              <p><strong>Capacidad Urgencias:</strong> {hospital.capacidadUrgencias}</p>
+
+              {/* Botón para mostrar el mapa */}
+              <button onClick={() => handleMostrarMapa(hospital.documento)}>
+                {mostrarMapa === hospital.documento ? "Ocultar Mapa" : "Mostrar Mapa"}
+              </button>
+
+              {/* Mapa y enlace para dirigirse al hospital */}
+              {mostrarMapa === hospital.documento && (
+                <>
+                  <iframe
+                    title={`Mapa ${hospital.nombre}`}
+                    width="600"
+                    height="450"
+                    loading="lazy"
+                    src={generarUrlMapa(hospital)}
+                  />
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${hospital.coordenadas?.lat},${hospital.coordenadas?.lng}`}
+                    target="_blank"
+                  >
+                    Dirigirse a este hospital
+                  </a>
+                </>
+              )}
+              <hr />
+            </div>
+          ))
+        ) : (
+          <p>No hay hospitales registrados para tu EPS.</p>
+        )}
+      </div>
+    </div>
+  );
 };
 
-export default InicioUsuarios;
+export default InicioUsuario;
