@@ -88,7 +88,7 @@ const InicioHospital = () => {
                 }
             }
         } catch (error) {
-            console.error("Error al obtener datos del hospital:", error);
+            console.error("Error al obtener datos del hospital:", error)
         }
     };
 
