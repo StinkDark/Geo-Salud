@@ -88,8 +88,10 @@ const Navbar = () => {
                     )}
                 </li>
 
-                {/* Enlace a la sección "Soporte" */}
-                <li><Link href="/soporte">Soporte</Link></li>
+                {/* Sección "Soporte" sin enlace */}
+                <li className="dropdown">
+                    Soporte
+                </li>
             </ul>
         </nav>
     );

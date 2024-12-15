@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import "./page.css"
 
 const LoginUsuario = () => {
     const [nombre, setNombre] = useState("");

@@ -14,6 +14,7 @@ const InicioUsuario = () => {
   // Obtener hospitales para la EPS seleccionada
   const obtenerHospitalesPorEps = async (eps) => {
     try {
+      console.log("Obteniendo hospitales para EPS:", eps);
       const refHospitales = ref(database, "hospitales");
       const snapshot = await get(refHospitales);
 
@@ -27,7 +28,6 @@ const InicioUsuario = () => {
         const hospitalesConCoordenadas = await Promise.all(
           hospitalesAtendidos.map(async (hospital) => {
             const coordenadas = await obtenerCoordenadasDesdeDireccion(hospital.direccion);
-
             return {
               ...hospital,
               coordenadas
@@ -35,6 +35,7 @@ const InicioUsuario = () => {
           })
         );
 
+        console.log("Hospitales obtenidos:", hospitalesConCoordenadas);
         setHospitales(hospitalesConCoordenadas);
       }
     } catch (error) {
@@ -42,13 +43,15 @@ const InicioUsuario = () => {
     }
   };
 
+  // Manejo del cambio en el selector de EPS
   const handleEpsChange = (e) => {
     const eps = e.target.value;
+    console.log("EPS seleccionada:", eps);
     setEpsSeleccionada(eps);
     obtenerHospitalesPorEps(eps);
   };
 
-  // Obtener coordenadas usando la API de Google Maps
+  // Obtener coordenadas desde Google Maps API
   const obtenerCoordenadasDesdeDireccion = async (direccion) => {
     try {
       const response = await fetch(
@@ -60,7 +63,6 @@ const InicioUsuario = () => {
         const { lat, lng } = data.results[0].geometry.location;
         return { lat, lng };
       } else {
-        console.error(`No se encontraron coordenadas para la dirección: ${direccion}`);
         return null;
       }
     } catch (error) {
@@ -70,33 +72,40 @@ const InicioUsuario = () => {
   };
 
   const generarUrlMapa = (hospital) => {
+    console.log("Generando URL del mapa para:", hospital.coordenadas);
     return `https://www.google.com/maps/embed/v1/place?key=${googleApiKey}&q=${hospital.coordenadas?.lat},${hospital.coordenadas?.lng}`;
   };
 
   const handleMostrarMapa = (documento) => {
+    console.log("Mostrando mapa para el documento:", documento);
     setMostrarMapa(prevEstado => prevEstado === documento ? null : documento);
   };
 
-  // Escuchar cambios en tiempo real en la base de datos para EPS
+  // Escuchar cambios en tiempo real en la base de datos de Firebase
   useEffect(() => {
     const refHospitales = ref(database, "hospitales");
 
     const unsubscribe = onValue(refHospitales, (snapshot) => {
+      console.log("Snapshot en tiempo real:", snapshot.val());
+
       if (snapshot.exists()) {
         const datosHospitales = snapshot.val();
 
-        // Obtener todas las EPS únicas desde los hospitales
         const epsUnicas = new Set();
         Object.values(datosHospitales).forEach(hospital => {
           hospital.epsAtendidas?.forEach(eps => epsUnicas.add(eps));
         });
 
+        console.log("EPS únicos encontrados:", Array.from(epsUnicas));
+
         setEpsDisponibles(Array.from(epsUnicas));
       }
     });
 
-    // Cleanup listener al desmontar el componente
-    return () => unsubscribe();
+    return () => {
+      console.log("Desmontando el componente y limpiando suscripciones.");
+      unsubscribe();
+    };
   }, []);
 
   return (

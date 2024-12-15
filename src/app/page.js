@@ -60,7 +60,7 @@ const Lobby = () => {
                 <div className="map-section"> 
                     {/* Sección que contiene un mapa interactivo. */}
                     <img
-                        src="https://alpoma.net/carto/wp-content/uploads/2019/07/An_Animated_Map_of_the_Earth.gif" 
+                        src="https://tse4.mm.bing.net/th?id=OIG3.sqkBY344j9QeSw4rxjSN&pid=ImgGn" 
                         // URL de una imagen de un mapa interactivo animado.
                         alt="Mapa interactivo" 
                         // Texto alternativo para accesibilidad.
