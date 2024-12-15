@@ -12,10 +12,20 @@ const InicioHospital = () => {
     const [editableCapacidad, setEditableCapacidad] = useState("");
     const [location, setLocation] = useState({ lat: "", lng: "" });
     const [mapsLoaded, setMapsLoaded] = useState(false);
+    const [nombreHospital, setNombreHospital] = useState("");
 
     const router = useRouter();
     const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-    const nombreHospital = sessionStorage.getItem("nombreHospital");
+
+    // Cargar `sessionStorage` solo en el cliente
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const hospitalNombre = sessionStorage.getItem("nombreHospital");
+            if (hospitalNombre) {
+                setNombreHospital(hospitalNombre);
+            }
+        }
+    }, []);
 
     const cargarGoogleMaps = () => {
         if (!window.google && !document.querySelector(`script[src*="maps.googleapis.com/maps/api/js"]`)) {
@@ -74,13 +84,11 @@ const InicioHospital = () => {
                     }
                 } else {
                     console.error("No se encontraron datos del hospital.");
-                    console.log("No se encontraron datos del hospital.");
                     router.replace("/LoginHospital");
                 }
             }
         } catch (error) {
             console.error("Error al obtener datos del hospital:", error);
-            console.log("Hubo un error al cargar los datos del hospital.");
         }
     };
 
@@ -92,7 +100,6 @@ const InicioHospital = () => {
             setCapacidadUrgencias(editableCapacidad);
         } catch (error) {
             console.error("Error al actualizar la capacidad:", error);
-            console.log("No se pudo actualizar la capacidad.");
         }
     };
 
@@ -128,8 +135,10 @@ const InicioHospital = () => {
     };
 
     useEffect(() => {
-        cargarGoogleMaps();
-        obtenerDatos();
+        if (nombreHospital) {
+            cargarGoogleMaps();
+            obtenerDatos();
+        }
     }, [nombreHospital, router, mapsLoaded]);
 
     return (
@@ -142,23 +151,18 @@ const InicioHospital = () => {
                     <p><strong>Dirección:</strong> {hospitalData.direccion}</p>
                     <p><strong>NIT:</strong> {hospitalData.nit}</p>
 
-                    <div>
-                        <label>
-                            <strong>Capacidad Total en Urgencias:</strong>
-                            <input
-                                type="number"
-                                value={editableCapacidad}
-                                onChange={(e) => setEditableCapacidad(e.target.value)}
-                                min="0"
-                            />
-                            <button onClick={actualizarCapacidad}>
-                                Actualizar
-                            </button>
-                        </label>
-                    </div>
-
-                    <p><strong>Responsable:</strong> {hospitalData.responsable?.nombre}</p>
-                    <p><strong>Cédula del Responsable:</strong> {hospitalData.responsable?.documento}</p>
+                    <label>
+                        <strong>Capacidad Total en Urgencias:</strong>
+                        <input
+                            type="number"
+                            value={editableCapacidad}
+                            onChange={(e) => setEditableCapacidad(e.target.value)}
+                            min="0"
+                        />
+                        <button onClick={actualizarCapacidad}>
+                            Actualizar
+                        </button>
+                    </label>
 
                     <div id="map" style={{ width: "100%", height: "400px" }}></div>
 
