@@ -1,7 +1,6 @@
 'use client'; 
 // Indica que este componente es un componente cliente en Next.js (se ejecuta del lado del cliente).
-
-import "./page.css"; 
+ 
 // Importa el archivo CSS para estilizar este componente.
 
 import { useEffect, useState } from "react"; 
@@ -44,22 +43,23 @@ const Lobby = () => {
 
     return ( 
         // Renderiza el contenido del componente.
-        <div> 
+        <div className="bg-gradient-to-r from-white to-blue-700 h-screen h-100%">
+            <div className="container bg-gradient-to-r from-white to-blue-700 max-w-md mx-auto bg-white rounded-xl shadow-lg  gap-x-4 "> 
             {/* Container principal */}
-            <div className="lobby-container"> 
+            <div className="lobby-container font-roboto font-sans text-gray-700 p-6 max-w-8xl mx-auto bg-gray-100 rounded-2xl shadow-2xl overflow-hidden m-10 h-1/2"> 
                 {/* Contenedor principal estilizado con la clase `lobby-container`. */}
 
-                <header className="welcome-section"> 
+                <header className="welcome-section text-center p-6 bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-2xl mb-5 animate-fadeIn duration-1500 ease-in-out"> 
                     {/* Sección de bienvenida estilizada con la clase `welcome-section`. */}
-                    <h1>🌐 Bienvenidos a GeoSalud</h1> 
+                    <h1 className="title flex justify-center font-bold text-2xl m-0">🌐 Bienvenidos a GeoSalud</h1> 
                     {/* Título principal del componente. */}
-                    <p>La tecnología al servicio del sector salud</p> 
+                    <p className="text-base font-medium mt-5">La tecnología al servicio del sector salud</p> 
                     {/* Subtítulo que describe brevemente la función del proyecto. */}
                 </header>
 
-                <div className="map-section"> 
+                <div className="map-section text-center my-5"> 
                     {/* Sección que contiene un mapa interactivo. */}
-                    <img
+                    <img className="w-full max-w-5xl h-auto rounded-2xl transition-transform duration-300 ease-in-out shadow-lg p-2 bg-azure transform hover:scale-105"
                         src="https://tse4.mm.bing.net/th?id=OIG3.sqkBY344j9QeSw4rxjSN&pid=ImgGn" 
                         // URL de una imagen de un mapa interactivo animado.
                         alt="Mapa interactivo" 
@@ -67,20 +67,22 @@ const Lobby = () => {
                         onClick={() => window.open("https://www.google.com/maps", "_blank")} 
                         // Al hacer clic en la imagen, se abre Google Maps en una nueva pestaña del navegador.
                     />
-                    <p>Haz clic en el mapa para abrir Google Maps</p> 
+                    <p className="font-bold my-10 text-#555">Haz clic en el mapa para abrir Google Maps</p> 
                     {/* Texto que instruye al usuario sobre cómo interactuar con el mapa. */}
                 </div>
 
                 {/* Datos curiosos */}
-                <div className="fact-card"> 
+                <div className="fact-card p-6 text-center bg-blue-100 rounded-2xl mt-10 shadow-md animate-popIn duration-1000 ease-in"> 
                     {/* Tarjeta que muestra un dato curioso estilizado con la clase `fact-card`. */}
-                    <h2>💡 Dato Curioso</h2> 
+                    <h2 className="text-2xl text-blue-600 font-bold">💡 Dato Curioso</h2> 
                     {/* Título de la sección de datos curiosos. */}
-                    <p>{currentFact}</p> 
+                    <p className="text-lg font-bold text-blue-700 mt-5">{currentFact}</p> 
                     {/* Muestra el dato curioso actual desde el estado `currentFact`. */}
                 </div>
             </div>
         </div>
+        </div>
+        
     );
 };
 

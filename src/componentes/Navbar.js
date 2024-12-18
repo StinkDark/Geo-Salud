@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
-import { database } from "@/config/firebase";
-import './Navbar.css';
+import { database } from "../config/firebase";
+
 
 const Navbar = () => {
     const [dropdownIngreso, setDropdownIngreso] = useState(false);
@@ -44,21 +44,22 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className="navbar-container">
-            <ul>
-                <li><Link href="/">Geosalud</Link></li>
+
+        <nav className="navbar-container text-white font-bold bg-gradient-to-r from-blue-800 to-blue-700 p-10  border-b-4 border-blue-600 shadow-lg transition-colors duration-500 ease-in-out font-sans text-lg mb-20">
+            <ul className=" flex justify-evenly ">
+                <li className="relative font-bold transition-transform duration-300 ease-in-out flex-col"><Link href="/">Geosalud</Link></li>
 
                 {/* Dropdown de "Ingreso" */}
                 <li 
-                    className="dropdown" 
+                    className="dropdown flex-col gap-10" 
                     onMouseEnter={() => toggleDropdown("ingreso")} 
                     onMouseLeave={() => setDropdownIngreso(false)}
                 >
                     Ingreso
                     {dropdownIngreso && (
-                        <div className="dropdown-content">
-                            <Link href="/Ingreso/login/usuario">Usuario</Link>
-                            <Link href="/Ingreso/login/hospital">Hospital</Link>
+                        <div className="dropdown ">
+                            <Link className="flex gap-y-4 text-black hover:bg-white/20 hover:scale-105 hover:font-bold" href="/ingreso/login/usuario">Usuario</Link>
+                            <Link className="flex gap-y-4 text-black hover:bg-white/20 hover:scale-105 hover:font-bold" href="/ingreso/login/hospital">Hospital</Link>
                         </div>
                     )}
                 </li>
@@ -78,7 +79,7 @@ const Navbar = () => {
                             {eps.length > 0 ? (
                                 eps.map((epsItem, index) => (
                                     <div key={index} className="eps-info">
-                                        <p><strong>EPS:</strong> {epsItem}</p>
+                                        <p className="flex gap-y-4 text-black hover:bg-white/20 hover:scale-105 hover:font-bold"><strong>EPS:</strong> {epsItem}</p>
                                     </div>
                                 ))
                             ) : (
