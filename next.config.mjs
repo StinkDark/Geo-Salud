@@ -1,13 +1,12 @@
 /** @type {import('next').NextConfig} */
-import { defineConfig } from "next/config";
-
-const nextConfig = defineConfig({
+const nextConfig = {
   experimental: {
-    appDir: true,
+    appDir: true, // Activa la nueva estructura de directorios "app"
   },
   env: {
     NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-  }
-});
+  },
+};
 
-export default nextConfig;
+export default nextConfig; // Si usas ESM (mjs) 
+// module.exports = nextConfig; // Si usas CommonJS (js)
