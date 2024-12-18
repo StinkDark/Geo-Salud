@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
-import Navbar from "../componentes/Navbar";
+
 import "../../src/globals.css";
+import LoginHospital from "./page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,13 +23,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className="bg-gradient-to-b from-azure to-blue-500 h-screen h-100%"
+        className="bg-gradient-to-b from-azure to-blue-500 h-screen h-100% "
       >
 
 
-         {/* Navbar principal */}
+         {/* Login Hospital */}
          
-        <Navbar />
+        <LoginHospital />
         {children}
 
 

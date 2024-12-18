@@ -2,7 +2,7 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import './sobre-nosotros.css';
+
 
 const SobreNosotros = () => {
     const router = useRouter();
