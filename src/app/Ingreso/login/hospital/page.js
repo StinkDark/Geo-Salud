@@ -52,8 +52,9 @@ const LoginHospital = () => {
     };
 
     return (
-        <div className="login-container max-w-5xl mx-auto p-6 bg-gray-100 rounded-lg shadow-md text-center font-sans text-gray-700 animate-fadeInLogin duration-1000 ease-in">
-            <h2 className="text-5xl font-bold text-#0077b6-500 mb-4 ">Iniciar Sesión Hospital</h2>
+        <div className="login-container max-w-auto mx-auto p-6 bg-gray-100 rounded-lg shadow-md text-center font-sans text-gray-700 animate-fadeInLogin duration-1000 ease-in
+        sm:bg-gray-100 rounded-sm shadow-md text-center font-sans text-blue animate-fadeInLogin duration-1000 ease-in max-w-90">
+            <h2 className="text-lg font-bold text-#0077b6-500 mb-4 sm:text-sm ">Iniciar Sesión Hospital</h2>
 
             {/* Formulario para el inicio de sesión del hospital */}
             <form 

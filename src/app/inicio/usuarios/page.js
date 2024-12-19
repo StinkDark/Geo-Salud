@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { ref, get, onValue } from "firebase/database";
 import { database } from "@/config/firebase";
-
+import "./page.css"
 const InicioUsuario = () => {
   const [epsSeleccionada, setEpsSeleccionada] = useState("");
   const [hospitales, setHospitales] = useState([]);
@@ -109,12 +109,12 @@ const InicioUsuario = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Selecciona tu EPS</h2>
+    <div className="eps-container border-4 border-solid border-white m-20">
+      <h2 className="font-bold border-2 border-solid border-white text-2xl bg:gray flex justify-start">Selecciona tu EPS</h2>
 
       {/* Selector de EPS dinámico */}
       <label>
-        <strong>EPS:</strong>
+        <strong className="font-bold bg:black">EPS:</strong>
         <select onChange={handleEpsChange} value={epsSeleccionada}>
           <option value="" disabled>Selecciona tu EPS</option>
           {epsDisponibles.map(eps => (
@@ -125,17 +125,21 @@ const InicioUsuario = () => {
 
       {/* Información de Hospitales */}
       <div>
-        <h3>Información de Hospitales</h3>
+        <h3 className="flex justify-start font-bold text-2xl">Información de Hospitales</h3>
 
         {hospitales.length > 0 ? (
           hospitales.map((hospital) => (
             <div key={hospital.nit}>
-              <p><strong>Nombre:</strong> {hospital.nombre}</p>
-              <p><strong>Documento del Responsable:</strong> {hospital.responsable?.documento}</p>
-              <p><strong>Cargo:</strong> {hospital.responsable?.cargo}</p>
-              <p><strong>Dirección:</strong> {hospital.direccion}</p>
-              <p><strong>Capacidad Urgencias:</strong> {hospital.capacidadUrgencias}</p>
+              <div className="contenedor-datos-hospital mb-2">
 
+                <p className="font-bold text-xl"><strong className="font-bold m-2">Nombre:</strong> {hospital.nombre}</p>
+                <p><strong className="font-bold m-2"> Documento del Responsable:</strong> {hospital.responsable?.documento}</p>
+                <p><strong className="font-bold m-2">Cargo:</strong> {hospital.responsable?.cargo}</p>
+                <p><strong className="font-bold m-2">Dirección:</strong> {hospital.direccion}</p>
+                <p><strong className="font-bold m-2">Capacidad Urgencias:</strong> {hospital.capacidadUrgencias}</p>
+
+              </div>
+            
               {/* Botón para mostrar el mapa */}
               <button onClick={() => handleMostrarMapa(hospital.documento)}>
                 {mostrarMapa === hospital.documento ? "Ocultar Mapa" : "Mostrar Mapa"}

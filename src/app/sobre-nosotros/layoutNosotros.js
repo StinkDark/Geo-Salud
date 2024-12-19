@@ -23,7 +23,7 @@ export default function nosotrosLayout({children}) {
          {/* Sobre Nosotros */}
          
         <SobreNosotros />
-      
+        
         {children}
 
       </body>

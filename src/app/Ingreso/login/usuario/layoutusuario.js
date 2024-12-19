@@ -1,7 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 
-import Navbar from "../componentes/Navbar";
+
 import "../../src/globals.css";
+import LoginUsuario from "./page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,14 +23,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-      //prueba del responsive design, para tamaño pequeño el background sera de color negro, para dispositivos medianos, el background sera azul
-        className="bg:blue sm: bg-blue md:bg-blue "
+        className="bg-gradient-to-b from-azure to-blue-500 h-screen h-100% "
       >
 
 
-         {/* Navbar principal */}
+         {/* Login Hospital */}
          
-        <Navbar />
+        <LoginUsuario/>
         {children}
 
 

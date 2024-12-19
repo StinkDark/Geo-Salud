@@ -45,8 +45,8 @@ const Navbar = () => {
 
     return (
 
-        <nav className="navbar-container text-white text-lg font-bold bg-gradient-to-b from-blue-700 to-blue-500 p-10  border-b-4 border-blue-600 shadow-lg transition-colors duration-500 ease-in-out font-sans text-lg mb-20">
-            <ul className=" flex justify-evenly ">
+        <nav className="navbar-container text-white sm:flex justify-evenly items-center m-2 gap-5 font-bold">
+            <ul className=" flex justify-evenly sm:flex justify-evenly  m-2 gap-2 font-bold">
                 <li className="relative font-bold transition-transform duration-300 ease-in-out flex-col"><Link href="/">Geosalud</Link></li>
 
                 {/* Dropdown de "Ingreso" */}

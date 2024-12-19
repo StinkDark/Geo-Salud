@@ -1,5 +1,3 @@
-
-/* Contenedor principal */
 .usuario-container {
     max-width: 400px;
     margin: 50px auto;
@@ -86,8 +84,10 @@
 
 
 
-/* Animación de fadeIn */
-@keyframes fadeInUsuario {
+
+
+/* Animaciones */
+@keyframes fadeInLogin {
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -96,4 +96,8 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.usuario-container {
+    animation: fadeInLogin 1s ease-in;
 }

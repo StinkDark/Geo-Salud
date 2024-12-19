@@ -1,0 +1,13 @@
+.contenedor-servicios {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.servicio {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px;
+    transition: transform 0.3s;
+}
