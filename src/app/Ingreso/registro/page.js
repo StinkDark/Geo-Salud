@@ -83,14 +83,17 @@ const RegistroHospital = () => {
     };
 
     return (
-        <div className="form-container">
-            <h2>Registro del Hospital</h2>
+        <div className="form-container border-2 border-solid border-black flex justify-center flex-col items-center sm:border-2 border-solid border-black flex flex-col items-center p-5 h-100 mt-0">
+            <h2 className="font-bold text-2xl flex justify-center ">Registro del Hospital</h2>
 
             {/* Formulario para registrar el hospital */}
-            <form onSubmit={handleSubmit}>
+            <form 
+            className="sm:border-2 border-solid border-black flex flex-col items-center p-0"
+            onSubmit={handleSubmit}>
 
                 {/* Input para el nombre del hospital */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="Nombre del hospital"
                     value={nombreHospital}
@@ -100,6 +103,7 @@ const RegistroHospital = () => {
                 
                 {/* Input para la dirección del hospital */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="Dirección"
                     value={direccion}
@@ -109,6 +113,7 @@ const RegistroHospital = () => {
 
                 {/* Input para el NIT del hospital */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="NIT"
                     value={nit}
@@ -118,6 +123,7 @@ const RegistroHospital = () => {
 
                 {/* Input para el nombre del responsable */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="Nombre del Responsable"
                     value={responsableNombre}
@@ -127,6 +133,7 @@ const RegistroHospital = () => {
                 
                 {/* Input para el documento del responsable */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="Documento del Responsable"
                     value={responsableDocumento}
@@ -136,6 +143,7 @@ const RegistroHospital = () => {
                 
                 {/* Input para el cargo del responsable */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="text"
                     placeholder="Cargo del Responsable"
                     value={cargo}
@@ -145,6 +153,7 @@ const RegistroHospital = () => {
                 
                 {/* Input para la capacidad de urgencias */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="number"
                     placeholder="Capacidad Urgencias"
                     value={capacidadUrgencias}
@@ -155,6 +164,7 @@ const RegistroHospital = () => {
                 
                 {/* Input para la contraseña del responsable */}
                 <input
+                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
                     type="password"
                     placeholder="Contraseña"
                     value={contrasena}
@@ -163,7 +173,7 @@ const RegistroHospital = () => {
                 />
 
                 {/* Sección para agregar EPS */}
-                <div>
+                <div className="sm:border-2 border-solid border-black flex flex-col items-center p-5">
                     <input
                         type="text"
                         placeholder="Nueva EPS"
