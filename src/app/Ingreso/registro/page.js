@@ -68,18 +68,17 @@ const RegistroHospital = () => {
             const snapshot = await get(refHospital);
 
             if (snapshot.exists()) {
-                alert("Ya existe un hospital con este NIT.");  // Muestra alerta si el hospital ya existe.
+                
                 return;
             }
 
             // Guarda el hospital en la base de datos de Firebase
             await set(refHospital, hospitalData);
-            alert("Hospital registrado exitosamente.");
+           
             router.push("/Ingreso/login/hospital");  // Redirecciona al formulario de inicio de sesión del hospital.
         } catch (error) {
             console.error("Error al registrar el hospital:", error);
-            alert("Hubo un error al registrar el hospital.");  // Manejo de posibles errores en Firebase.
-        }
+          
     };
 
     return (

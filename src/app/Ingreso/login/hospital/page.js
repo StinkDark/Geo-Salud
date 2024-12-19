@@ -32,7 +32,7 @@ const LoginHospital = () => {
                     String(datosHospital.responsable.documento).trim() === String(documento).trim() &&
                     String(datosHospital.responsable.contrasena).trim() === String(contrasena).trim()
                 ) {
-                    alert("Inicio de sesión exitoso");
+                
 
                     // Guarda el NIT del hospital en sessionStorage para mantener la sesión activa.
                     sessionStorage.setItem("nombreHospital", nit);
@@ -40,14 +40,14 @@ const LoginHospital = () => {
                     // Redirecciona al hospital a la página de inicio después del inicio de sesión.
                     router.push("/inicio/hospital");
                 } else {
-                    alert("Contraseña o documento incorrecto");
+                  
                 }
             } else {
-                alert("Hospital no encontrado en el sistema");  // Notifica si el hospital no existe en la base de datos.
+                
             }
         } catch (err) {
             console.error("Error al recuperar datos:", err);
-            alert("Hubo un error al iniciar sesión");  // Muestra un mensaje de error si falla la solicitud.
+          
         }
     };
 

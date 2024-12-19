@@ -21,7 +21,7 @@ const LoginUsuario = () => {
             // Guardar el nombre en sessionStorage
             sessionStorage.setItem("nombreUsuario", nombre);
 
-            alert("Inicio de sesión exitoso.");
+            
             router.push("/inicio/usuarios");
         } catch (err) {
             console.error(err);
