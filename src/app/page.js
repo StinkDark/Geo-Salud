@@ -49,9 +49,9 @@ const Lobby = () => {
             <div className="lobby-container font-roboto font-sans text-gray-700 p-6 max-w-100 max-h-200  bg-gray-200 rounded-2xl shadow-2xl overflow-hidden  h-1/2"> 
                 {/* Contenedor principal estilizado con la clase `lobby-container`. */}
 
-                <header className="welcome-section text-center p-6 bg-gradient-to-r from-blue-600 to-blue-400 text-white rounded-2xl mb-5 animate-fadeIn duration-1500 ease-in-out"> 
+                <header className="welcome-section text-center p-6 bg-cyan-600 text-white rounded-2xl mb-5 animate-fadeIn duration-1500 ease-in-out"> 
                     {/* Sección de bienvenida estilizada con la clase `welcome-section`. */}
-                    <h1 className="title flex justify-center font-bold text-2xl m-0">🌐 Bienvenidos a GeoSalud</h1> 
+                    <h1 className="title flex justify-center font-bold text-2xl m-0">🏥 Bienvenidos a GeoSalud</h1> 
                     {/* Título principal del componente. */}
                     <p className="text-base font-medium mt-5">La tecnología al servicio del sector salud</p> 
                     {/* Subtítulo que describe brevemente la función del proyecto. */}

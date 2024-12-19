@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../config/firebase";
 
@@ -53,57 +53,87 @@ const Navbar = () => {
         
 
 
-        <nav className="navbar-container text-white sm:flex justify-evenly items-center m-2 gap-5 font-bold border-2 border-solid border-white">
-            <ul className=" flex justify-evenly sm:flex justify-evenly  m-2 gap-2 font-bold">
-                <li className="relative font-bold transition-transform duration-300 ease-in-out flex-col"><Link href="/">Geosalud</Link></li>
-
-                {/* Dropdown de "Ingreso" */}
-                <li 
-                    className="dropdown flex-col gap-10" 
-                    onMouseEnter={() => toggleDropdown("ingreso")} 
-                    onMouseLeave={() => setDropdownIngreso(false)}
+        <nav className="navbar-container bg-cyan-600 text-white flex flex-wrap justify-center items-center p-4 gap-4 font-bold border-2 border-solid border-white rounded shadow-lg">
+        {/* Botón GeoSalud */}
+        <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
+          <Link href="/">GeoSalud</Link>
+        </button>
+  
+        {/* Botón con dropdown de "Ingreso" */}
+        <div
+          className="relative dropdown-ingreso"
+          onClick={() => toggleDropdown("ingreso")}
+        >
+          <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
+            Ingreso
+          </button>
+          <div
+            className={`bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute transition-all duration-200 ease-in-out ${
+              dropdownIngreso ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            }`}
+          >
+            {dropdownIngreso && (
+              <>
+                <Link
+                  href="/Ingreso/login/usuario"
+                  className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
                 >
-                    Ingreso
-                    {dropdownIngreso && (
-                        <div className="dropdown ">
-                            <Link className="flex gap-y-4 text-black hover:bg-white/50 hover:scale-105 hover:font-bold rounded" href="/Ingreso/login/usuario">Usuario</Link>
-                            <Link className="flex gap-y-4 text-black hover:bg-white/50 hover:scale-105 hover:font-bold rounded" href="/Ingreso/login/hospital">Hospital</Link>
-                        </div>
-                    )}
-                </li>
-
-                {/* Enlace a la sección "Sobre Nosotros" */}
-                <li><Link href="/sobre-nosotros">Sobre Nosotros</Link></li>
-
-                {/* Dropdown de "Nuestros Aliados" */}
-                <li 
-                    className="dropdown" 
-                    onMouseEnter={() => toggleDropdown("aliados")} 
-                    onMouseLeave={() => setDropdownAliados(false)}
+                  Usuario
+                </Link>
+                <Link
+                  href="/Ingreso/login/hospital"
+                  className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
                 >
-                    Nuestros Aliados
-                    {dropdownAliados && (
-                        <div className="dropdown-content">
-                            {eps.length > 0 ? (
-                                eps.map((epsItem, index) => (
-                                    <div key={index} className="eps-info">
-                                        <p className="flex gap-y-4 text-black hover:bg-white/50 hover:scale-105 hover:font-bold rounded"><strong>EPS:</strong> {epsItem}</p>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Cargando Aliados...</p>
-                            )}
-                        </div>
-                    )}
-                </li>
-
-                {/* Sección "Soporte" sin enlace */}
-                <li className="dropdown">
-                    Soporte
-                </li>
-            </ul>
-        </nav>
+                  Hospital
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+  
+        {/* Botón Sobre Nosotros */}
+        <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
+          <Link href="/sobre-nosotros">Sobre Nosotros</Link>
+        </button>
+  
+        {/* Botón con dropdown de "Nuestros Aliados" */}
+        <div
+          className="relative dropdown-aliados"
+          onClick={() => toggleDropdown("aliados")}
+        >
+          <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
+            Nuestros Aliados
+          </button>
+          <div
+            className={`bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute transition-all duration-200 ease-in-out ${
+              dropdownAliados ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            }`}
+          >
+            {dropdownAliados && (
+              <>
+                {eps && eps.length > 0 ? (
+                  eps.map((epsItem, index) => (
+                    <p
+                      key={index}
+                      className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
+                    >
+                      {epsItem}
+                    </p>
+                  ))
+                ) : (
+                  <p className="text-sm">Cargando Aliados...</p>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+  
+        {/* Botón Soporte */}
+        <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
+          Soporte
+        </button>
+      </nav>
     );
-};
-
-export default Navbar;
+  };
+  
+  export default Navbar;
