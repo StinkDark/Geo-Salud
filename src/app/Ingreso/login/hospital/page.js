@@ -61,7 +61,7 @@ const LoginHospital = () => {
             onSubmit={handleSubmit}>
                 <label className="font-bold text-gray-800 text-left">NIT del Hospital</label>
                 <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
+                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
                     placeholder="Ingrese el NIT del hospital"
                     value={nit}
                     onChange={(e) => setNit(e.target.value)}
@@ -70,7 +70,7 @@ const LoginHospital = () => {
                 
                 <label className="font-bold text-gray-800 text-left">Número de Documento</label>
                 <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
+                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
                     placeholder="Número del documento"
                     value={documento}
                     onChange={(e) => setDocumento(e.target.value)}
@@ -80,7 +80,7 @@ const LoginHospital = () => {
                 
                 <label className="font-bold text-gray-800 text-left">Contraseña</label>
                 <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
+                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
                     placeholder="Contraseña"
                     value={contrasena}
                     onChange={(e) => setContrasena(e.target.value)}
@@ -88,7 +88,8 @@ const LoginHospital = () => {
                     required
                 />
 
-                <button className="px-4 py-2 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-700 transition-colors duration-300 ease-in-out hover:scale-105 active:scale-95"
+                <button 
+                className="px-4 py-2 m-5 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-700 transition-colors duration-300 ease-in-out hover:scale-105 active:scale-95"
                 type="submit">Iniciar Sesión</button>  {/* Botón para enviar el formulario */}
             </form>
 

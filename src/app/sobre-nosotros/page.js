@@ -13,10 +13,10 @@ const SobreNosotros = () => {
     };
 
     return (
-        <div className="sobre-container">
+        <div className="container border-2 border-solid m-20">
             
             {/* Encabezado principal del componente */}
-            <h1>🌐 Sobre GeoSalud</h1>
+            <h1 className="text-4xl font-bold flex justify-center">🌐 Sobre GeoSalud</h1>
 
             {/* Descripción breve del propósito del proyecto */}
             <p><strong>📌 Simplificamos tu acceso a la atención médica de emergencia.</strong></p>
@@ -32,40 +32,40 @@ const SobreNosotros = () => {
             <h2>📜 ¿Qué te ofrecemos?</h2>
 
             {/* Contenedor para los servicios ofrecidos */}
-            <div className="contenedor-servicios">
+            <div className="contenedor-servicios border-2 border-solid grid grid-cols-6 gap-6 rounded-sm m-4">
                 
                 {/* Servicio 1: Localizar hospitales cercanos */}
-                <div className="servicio">
+                <div className="servicio border-2 border-solid ">
                     🗺️ <strong>Localizar hospitales cercanos</strong>
                     <p>Usa tu ubicación para encontrar opciones rápidas y seguras.</p>
                 </div>
 
                 {/* Servicio 2: Filtrar según tu EPS */}
-                <div className="servicio">
+                <div className="servicio border-2 border-solid ">
                     🏥 <strong>Filtrar según tu EPS</strong>
                     <p>Asegúrate de recibir atención en hospitales compatibles con tu cobertura.</p>
                 </div>
 
                 {/* Servicio 3: Ver tiempos de llegada estimados */}
-                <div className="servicio">
+                <div className="servicio border-2 border-solid ">
                     🚗 <strong>Ver tiempos de llegada estimados</strong>
                     <p>Descubre cuánto tardarás en llegar a cada hospital.</p>
                 </div>
 
                 {/* Servicio 4: Consultar ocupación en urgencias */}
-                <div className="servicio">
+                <div className="servicio border-2 border-solid ">
                     📊 <strong>Consultar ocupación en urgencias</strong>
                     <p>Conoce el estado actual del área de urgencias para tomar decisiones informadas.</p>
                 </div>
 
                 {/* Servicio 5: Tiempos de Respuesta Optimizados */}
-                <div className="servicio">
+                <div className="servicio border-2 border-solid ">
                     🕒 <strong>Tiempos de Respuesta Optimizados</strong>
                     <p>La rapidez y eficiencia garantizan tu acceso inmediato a servicios médicos.</p>
                 </div>
 
                 {/* Servicio 6: Seguridad y Privacidad */}
-                <div className="servicio">
+                <div className="servicioborder-2 border-solid  ">
                     🔒 <strong>Seguridad y Privacidad</strong>
                     <p>Tu información personal y médica se maneja con altos estándares de privacidad.</p>
                 </div>
