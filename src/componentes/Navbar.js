@@ -45,7 +45,15 @@ const Navbar = () => {
 
     return (
 
-        <nav className="navbar-container text-white sm:flex justify-evenly items-center m-2 gap-5 font-bold">
+         /*nota importante: en Tailwind.css los bordes se colocan dentro del className de cada etiqueta y comienzan con la palabra: border , ejemplo: border-2 border-solid border-white, 
+        cuando desee eliminarlos dirijase al className donde se encuentre y los borra*/
+
+        /*nota importante: Si nota que aparecen bordes en su pagina y sin embargo no estan creados en su className, dirijase al archivo page.css correspondiente a dicha pagina
+        lo ma probable es que haya sido creado allí y cuando no los necesite, los puede borrar*/
+        
+
+
+        <nav className="navbar-container text-white sm:flex justify-evenly items-center m-2 gap-5 font-bold border-2 border-solid border-white">
             <ul className=" flex justify-evenly sm:flex justify-evenly  m-2 gap-2 font-bold">
                 <li className="relative font-bold transition-transform duration-300 ease-in-out flex-col"><Link href="/">Geosalud</Link></li>
 

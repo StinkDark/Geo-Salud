@@ -1,3 +1,24 @@
+
+.contenedor-principal{
+    display: grid;
+    grid-column: 2;
+    grid-row: 2;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    background: linear-gradient(48deg,#fffdfd, rgb(83, 121, 245));
+    
+    border-radius: 10px;
+   
+}
+
+.contenedor-principal:hover{
+    transform: scale(.95);
+}
+
+/* quienes somos */
+
+
 .contenedor-servicios {
     display: flex;
     justify-content: space-between;
@@ -7,7 +28,30 @@
 
 .servicio {
     background-color: #fff;
+    display: grid;
     padding: 15px;
-    margin: 10px;
+    margin: 5px;
     transition: transform 0.3s;
+}
+
+.servicio:hover {
+    transform: scale(1.05);
+}
+
+
+.cuenta:hover {
+    background: linear-gradient(48deg,#fffdfd, rgb(83, 121, 245));
+    transform: scale(.95);
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

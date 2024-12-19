@@ -20,10 +20,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
+
+     /*nota importante: en Tailwind.css los bordes se colocan dentro del className de cada etiqueta y comienzan con la palabra: border , ejemplo: border-2 border-solid border-white, 
+        cuando desee eliminarlos dirijase al className donde se encuentre y los borra*/
+
+        /*nota importante: Si nota que aparecen bordes en su pagina y sin embargo no estan creados en su className, dirijase al archivo page.css correspondiente a dicha pagina
+        lo ma probable es que haya sido creado allí y cuando no los necesite, los puede borrar*/
+
     <html lang="en">
       <body
       //prueba del responsive design, para tamaño pequeño el background sera de color negro, para dispositivos medianos, el background sera azul
-        className="bg:blue sm: bg-blue md:bg-blue "
+      
+        className="bg:blue sm: bg-blue md:bg-blue border-2 border-solid border-white"
       >
 
 
