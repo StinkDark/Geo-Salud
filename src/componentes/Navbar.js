@@ -53,7 +53,7 @@ const Navbar = () => {
         
         <nav
         id="navbar"
-        className="navbar-container bg-cyan-600 text-white flex flex-wrap justify-center items-center p-4 gap-4 font-bold border-2 border-solid border-white rounded shadow-lg relative z-10"
+        className="navbar-container bg-cyan-600 text-white flex flex-wrap justify-center items-center p-6 gap-5 font-bold  rounded shadow-lg relative z-10"
       >
         {/* Botón GeoSalud */}
         <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">

@@ -20,45 +20,31 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-
-     /*nota importante: en Tailwind.css los bordes se colocan dentro del className de cada etiqueta y comienzan con la palabra: border , ejemplo: border-2 border-solid border-white, 
-        cuando desee eliminarlos dirijase al className donde se encuentre y los borra*/
-
-        /*nota importante: Si nota que aparecen bordes en su pagina y sin embargo no estan creados en su className, dirijase al archivo page.css correspondiente a dicha pagina
-        lo ma probable es que haya sido creado allí y cuando no los necesite, los puede borrar*/
+    /* Nota importante: en Tailwind.css los bordes se colocan dentro del className de cada etiqueta y comienzan con la palabra: border, 
+       ejemplo: border-2 border-solid border-white. Cuando desee eliminarlos diríjase al className donde se encuentren y bórralos */
 
     <html lang="en">
       <body
-      //prueba del responsive design, para tamaño pequeño el background sera de color negro, para dispositivos medianos, el background sera azul
-      
-        className="bg:blue sm: bg-blue md:bg-blue border-2 border-solid border-white"
+        // Prueba del responsive design, para tamaño pequeño el background será de color negro, para dispositivos medianos, será azul.
+        className="bg-blue sm:bg-blue md:bg-blue border-2 border-solid border-white"
       >
-
-
-         {/* Navbar principal */}
-         
+        {/* Navbar principal */}
         <Navbar />
         {children}
 
-
-      {/* footer */}
-      
-     
-
+        {/* Footer */}
+        <footer className="bg-cyan-600 text-white py-2">
+          <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div className="text-center md:text-left mb- md:mb-0">
+              <h1 className="font-bold text-2xl text-gray-200">Geosalud</h1>
+              <p className="text-sm text-gray-300">Tu salud, nuestra prioridad</p>
+            </div>
+          </div>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-200">© 2023 Geosalud. Todos los derechos reservados.</p>
+          </div>
+        </footer>
       </body>
-
-      <footer className="bg-cyan-600 text-white py-2 ">
-  <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-    <div className="text-center md:text-left mb- md:mb-0">
-      <h1 className="font-bold text-2xl text-gray-200">Geosalud</h1>
-      <p className="text-sm text-gray-300">Tu salud, nuestra prioridad</p>
-    </div>
-  </div>
-  <div className="text-center mt-4">
-    <p className="text-sm text-gray-200">© 2023 Geosalud. Todos los derechos reservados.</p>
-  </div>
-</footer>
-
     </html>
   );
 }

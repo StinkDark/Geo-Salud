@@ -86,7 +86,7 @@ const RegistroHospital = () => {
                 <h2 className="font-bold text-2xl text-center text-cyan-600 mb-8">Registro del Hospital</h2>
 
                 {/* Formulario para registrar el hospital */}
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6 text-black">
 
                     {/* Input para el nombre del hospital */}
                     <input
