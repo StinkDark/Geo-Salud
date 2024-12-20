@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { ref, get, onValue } from "firebase/database";
 import { database } from "@/config/firebase";
-import "./page.css"
+import "./page.css";
+
 const InicioUsuario = () => {
   const [epsSeleccionada, setEpsSeleccionada] = useState("");
   const [hospitales, setHospitales] = useState([]);
@@ -35,8 +36,11 @@ const InicioUsuario = () => {
           })
         );
 
-        console.log("Hospitales obtenidos:", hospitalesConCoordenadas);
-        setHospitales(hospitalesConCoordenadas);
+        // Ordenar hospitales por capacidad de urgencias de mayor a menor
+        const hospitalesOrdenados = hospitalesConCoordenadas.sort((a, b) => b.capacidadUrgencias - a.capacidadUrgencias);
+
+        console.log("Hospitales obtenidos y ordenados:", hospitalesOrdenados);
+        setHospitales(hospitalesOrdenados);
       }
     } catch (error) {
       console.error("Error al obtener hospitales:", error);
@@ -161,7 +165,6 @@ const InicioUsuario = () => {
                     src={generarUrlMapa(hospital)}
                   />
                   <a
-
                     href={`https://www.google.com/maps/search/?api=1&query=${hospital.coordenadas?.lat},${hospital.coordenadas?.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -169,7 +172,6 @@ const InicioUsuario = () => {
                   >
                     Dirigirse a este hospital
                   </a>
-
                 </>
               )}
             </div>
