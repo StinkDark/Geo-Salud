@@ -41,7 +41,24 @@ export default function RootLayout({ children }) {
         {children}
 
 
+      {/* footer */}
+      
+     
+
       </body>
+
+      <footer className="bg-cyan-600 text-white py-2 ">
+  <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <div className="text-center md:text-left mb-1 md:mb-0">
+      <h1 className="font-bold text-2xl text-gray-200">Geosalud</h1>
+      <p className="text-sm text-gray-300">Tu salud, nuestra prioridad</p>
+    </div>
+  </div>
+  <div className="text-center mt-4">
+    <p className="text-sm text-gray-200">© 2024 Geosalud. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
     </html>
   );
 }

@@ -51,44 +51,40 @@ const Navbar = () => {
         /*nota importante: Si nota que aparecen bordes en su pagina y sin embargo no estan creados en su className, dirijase al archivo page.css correspondiente a dicha pagina
         lo ma probable es que haya sido creado allí y cuando no los necesite, los puede borrar*/
         
-
-
-        <nav className="navbar-container bg-cyan-600 text-white flex flex-wrap justify-center items-center p-4 gap-4 font-bold border-2 border-solid border-white rounded shadow-lg">
+        <nav
+        id="navbar"
+        className="navbar-container bg-cyan-600 text-white flex flex-wrap justify-center items-center p-4 gap-4 font-bold border-2 border-solid border-white rounded shadow-lg relative z-10"
+      >
         {/* Botón GeoSalud */}
         <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
-          <Link href="/">GeoSalud</Link>
+          <Link href="/">Geosalud</Link>
         </button>
   
         {/* Botón con dropdown de "Ingreso" */}
         <div
-          className="relative dropdown-ingreso"
+          id="dropdown-ingreso"
+          className="relative"
           onClick={() => toggleDropdown("ingreso")}
         >
           <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
             Ingreso
           </button>
-          <div
-            className={`bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute transition-all duration-200 ease-in-out ${
-              dropdownIngreso ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-            }`}
-          >
-            {dropdownIngreso && (
-              <>
-                <Link
-                  href="/Ingreso/login/usuario"
-                  className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
-                >
-                  Usuario
-                </Link>
-                <Link
-                  href="/Ingreso/login/hospital"
-                  className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
-                >
-                  Hospital
-                </Link>
-              </>
-            )}
-          </div>
+          {dropdownIngreso && (
+            <div className="bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute z-20">
+              <Link
+                href="/Ingreso/login/usuario"
+                className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
+              >
+                Usuario
+              </Link>
+              <Link
+                href="/Ingreso/login/hospital"
+                className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
+              >
+                Hospital
+              </Link>
+            </div>
+          )}
         </div>
   
         {/* Botón Sobre Nosotros */}
@@ -98,34 +94,29 @@ const Navbar = () => {
   
         {/* Botón con dropdown de "Nuestros Aliados" */}
         <div
-          className="relative dropdown-aliados"
+          id="dropdown-aliados"
+          className="relative"
           onClick={() => toggleDropdown("aliados")}
         >
           <button className="bg-white text-cyan-700 font-semibold py-2 px-4 rounded transition-all duration-300 hover:bg-cyan-500 hover:text-white shadow-md">
             Nuestros Aliados
           </button>
-          <div
-            className={`bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute transition-all duration-200 ease-in-out ${
-              dropdownAliados ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-            }`}
-          >
-            {dropdownAliados && (
-              <>
-                {eps && eps.length > 0 ? (
-                  eps.map((epsItem, index) => (
-                    <p
-                      key={index}
-                      className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
-                    >
-                      {epsItem}
-                    </p>
-                  ))
-                ) : (
-                  <p className="text-sm">Cargando Aliados...</p>
-                )}
-              </>
-            )}
-          </div>
+          {dropdownAliados && (
+            <div className="bg-white text-cyan-700 shadow-lg rounded mt-2 p-2 absolute z-20">
+              {eps && eps.length > 0 ? (
+                eps.map((epsItem, index) => (
+                  <p
+                    key={index}
+                    className="block px-4 py-2 hover:bg-cyan-100 hover:text-cyan-900 rounded transition-all"
+                  >
+                    {epsItem}
+                  </p>
+                ))
+              ) : (
+                <p className="text-sm">Cargando Aliados...</p>
+              )}
+            </div>
+          )}
         </div>
   
         {/* Botón Soporte */}

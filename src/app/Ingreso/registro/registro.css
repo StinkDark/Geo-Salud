@@ -1,4 +1,4 @@
-/* General */
+/* General
 body {
     font-family: 'Roboto', Arial, sans-serif;
     background-color: #f4f4f9;
@@ -7,7 +7,7 @@ body {
     line-height: 1.6;
 }
 
-/* Contenedor del formulario */
+
 .form-container {
     width: 800px;
     margin: 5rem auto;
@@ -19,15 +19,7 @@ body {
     animation: fadeInForm 1.5s ease-in-out;
 }
 
-/* Título */
-/* .form-container h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #0077b6;
-    margin-bottom: 1.5rem;
-} */
 
-/* Inputs y botones */
 input[type="text"],
 input[type="number"],
 input[type="password"],
@@ -42,7 +34,7 @@ button[type="button"] {
     transition: all 0.3s ease;
 }
 
-/* Estilos de inputs */
+
 input::placeholder {
     color: #aaa;
 }
@@ -55,7 +47,7 @@ input[type="number"]:focus {
     outline: none;
 }
 
-/* Botón principal */
+
 button[type="submit"] {
     background-color: #0077b6;
     color: #fff;
@@ -75,7 +67,7 @@ button[type="submit"]:active {
     transform: scale(0.95);
 }
 
-/* Botón adicional (para añadir EPS) */
+
 button[type="button"] {
     background-color: #ffca2c;
     color: #fff;
@@ -94,7 +86,7 @@ button[type="button"]:active {
     transform: scale(0.95);
 }
 
-/* Sección EPS */
+
 .eps-section {
     margin-top: 1rem;
     text-align: center;
@@ -131,7 +123,7 @@ button[type="button"]:active {
     color: #b71c1c;
 }
 
-/* Tooltip */
+
 input[title],
 button[title] {
     position: relative;
@@ -154,7 +146,7 @@ button[title]:hover::after {
     z-index: 1;
 }
 
-/* Margen y texto */
+
 p {
     font-weight: bold;
     color: #555;
@@ -169,7 +161,7 @@ span {
 
 
 
-/* Animación */
+
 @keyframes fadeInForm {
     from {
         opacity: 0;
@@ -182,11 +174,11 @@ span {
     }
 }
 
-/* mediaquery = responsive para pantallas de telefono */
+
 
 @media (min-width: 390px) {
 
-    /* Título */
+
     
 .form-container h2 {
     font-size: 2rem;
@@ -207,7 +199,7 @@ span {
         animation: fadeInForm 1.5s ease-in-out;
     }
 
-    /* Inputs y botones */
+ 
     input[type="text"],
     input[type="number"],
     input[type="password"],
@@ -222,7 +214,7 @@ span {
         transition: all 0.3s ease;
     }
 
-    /* Estilos de inputs */
+ 
     input::placeholder {
         color: #aaa;
     }
@@ -235,7 +227,7 @@ span {
         outline: none;
     }
 
-    /* Botón principal */
+ 
     button[type="submit"] {
         background-color: #0077b6;
         color: #fff;
@@ -255,7 +247,7 @@ span {
         transform: scale(0.95);
     }
 
-    /* Botón adicional (para añadir EPS) */
+  
     button[type="button"] {
         background-color: #ffca2c;
         color: #fff;
@@ -274,7 +266,7 @@ span {
         transform: scale(0.95);
     }
 
-    /* Sección EPS */
+
     .eps-section {
         margin-top: 1rem;
         text-align: center;
@@ -311,7 +303,7 @@ span {
         color: #b71c1c;
     }
 
-    /* Tooltip */
+
     input[title],
     button[title] {
         position: relative;
@@ -334,8 +326,7 @@ span {
         z-index: 1;
     }
 
-    /* Margen y texto */
-    p {
+       p {
         font-weight: bold;
         color: #555;
         margin-top: 1rem;
@@ -347,4 +338,4 @@ span {
         justify-content: center;
     }
 
-}
+} */

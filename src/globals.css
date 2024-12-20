@@ -13,26 +13,23 @@
   :root {
     --background: #f0f9ff;
     --foreground: #0284c7;
-  
   }
 }
 
 body {
   color: var(--foreground);
-  color: var(--foreground);
-  color: var(--navy);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @keyframes fadeInLogin {
   from {
-      opacity: 0;
-      transform: translateY(-20px);
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

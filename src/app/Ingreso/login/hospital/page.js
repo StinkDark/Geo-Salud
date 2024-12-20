@@ -52,56 +52,58 @@ const LoginHospital = () => {
     };
 
     return (
-        <div className="login-container max-w-auto mx-auto p-6 bg-gray-100 rounded-lg shadow-md text-center font-sans text-gray-700 animate-fadeInLogin duration-1000 ease-in
-        sm:bg-gray-100 rounded-sm shadow-md text-center font-sans text-blue animate-fadeInLogin duration-1000 ease-in max-w-90">
-            <h2 className="text-lg font-bold text-#0077b6-500 mb-4 sm:text-sm ">Iniciar Sesión Hospital</h2>
+        <div className="login-container mt-8 max-w-sm mx-auto p-8 bg-white rounded-lg shadow-lg text-center font-sans text-gray-700 animate-fadeInLogin duration-1000 ease-in">
+        <h2 className="text-2xl font-bold text-cyan-600 mb-6">Iniciar Sesión Hospital</h2>
 
-            {/* Formulario para el inicio de sesión del hospital */}
-            <form 
-            className="flex flex-col gap-6"
-            onSubmit={handleSubmit}>
-                <label className="font-bold text-gray-800 text-left">NIT del Hospital</label>
-                <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
-                    placeholder="Ingrese el NIT del hospital"
-                    value={nit}
-                    onChange={(e) => setNit(e.target.value)}
-                    required
-                />
-                
-                <label className="font-bold text-gray-800 text-left">Número de Documento</label>
-                <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
-                    placeholder="Número del documento"
-                    value={documento}
-                    onChange={(e) => setDocumento(e.target.value)}
-                    type="text"
-                    required
-                />
-                
-                <label className="font-bold text-gray-800 text-left">Contraseña</label>
-                <input
-                    className="w-11/12 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:outline-none focus:border-blue-600 focus:ring-3 focus:ring-blue-300"
-                    placeholder="Contraseña"
-                    value={contrasena}
-                    onChange={(e) => setContrasena(e.target.value)}
-                    type="password"
-                    required
-                />
+        {/* Formulario para el inicio de sesión del hospital */}
+        <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
+            
+            <label className="font-semibold text-gray-800 text-left">NIT del Hospital</label>
+            <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition duration-200"
+                placeholder="Ingrese el NIT del hospital"
+                value={nit}
+                onChange={(e) => setNit(e.target.value)}
+                required
+            />
+            
+            <label className="font-semibold text-gray-800 text-left">Número de Documento</label>
+            <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition duration-200"
+                placeholder="Número del documento"
+                value={documento}
+                onChange={(e) => setDocumento(e.target.value)}
+                type="text"
+                required
+            />
+            
+            <label className="font-semibold text-gray-800 text-left">Contraseña</label>
+            <input
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-300 transition duration-200"
+                placeholder="Contraseña"
+                value={contrasena}
+                onChange={(e) => setContrasena(e.target.value)}
+                type="password"
+                required
+            />
 
-                <button 
-                className="px-4 py-2 m-5 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-700 transition-colors duration-300 ease-in-out hover:scale-105 active:scale-95"
-                type="submit">Iniciar Sesión</button>  {/* Botón para enviar el formulario */}
-            </form>
-
-            {/* Botón adicional para redirigir al formulario de registro de hospitales */}
+            {/* Botón de inicio de sesión */}
             <button 
-            className="px-4 py-2 m-5 rounded-md bg-blue-500 text-white font-bold hover:bg-blue-700 transition-colors duration-300 ease-in-out hover:scale-105 active:scale-95"
-            onClick={() => router.push('/Ingreso/registro')}>
-                Registrar Hospital
+                className="px-6 py-3 mt-4 mb-5 rounded-md bg-cyan-600 text-white font-bold hover:bg-cyan-700 transition-all duration-300 ease-in-out"
+                type="submit">
+                Iniciar Sesión
             </button>
-        </div>
-    );
+        </form>
+
+        {/* Botón para redirigir al registro de hospitales */}
+        <button 
+            className="px-6 py-3 rounded-md bg-cyan-600 text-white font-bold hover:bg-gray-400 transition-all duration-300 ease-in-out"
+            onClick={() => router.push('/Ingreso/registro')}>
+            Registrar Hospital
+        </button>
+    </div>
+);
 };
 
+// Asegúrate de cerrar bien la función antes del export
 export default LoginHospital;

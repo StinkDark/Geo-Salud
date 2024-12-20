@@ -68,139 +68,152 @@ const RegistroHospital = () => {
             const snapshot = await get(refHospital);
 
             if (snapshot.exists()) {
-                
                 return;
             }
 
             // Guarda el hospital en la base de datos de Firebase
             await set(refHospital, hospitalData);
-           
+
             router.push("/Ingreso/login/hospital");  // Redirecciona al formulario de inicio de sesión del hospital.
         } catch (error) {
             console.error("Error al registrar el hospital:", error);
-          
+        }
     };
 
     return (
-        <div className="form-container border-2 border-solid border-black flex justify-center flex-col items-center sm:border-2 border-solid border-black flex flex-col items-center p-5 h-100 mt-0">
-            <h2 className="font-bold text-2xl flex justify-center ">Registro del Hospital</h2>
+        <div className="form-container flex justify-center items-center p-5 sm:p-10 h-auto">
+            <div className="max-w-3xl w-full border-2 border-solid border-gray-300 rounded-lg p-6 bg-white shadow-lg">
+                <h2 className="font-bold text-2xl text-center text-cyan-600 mb-8">Registro del Hospital</h2>
 
-            {/* Formulario para registrar el hospital */}
-            <form 
-            className="sm:border-2 border-solid border-black flex flex-col items-center p-0"
-            onSubmit={handleSubmit}>
+                {/* Formulario para registrar el hospital */}
+                <form onSubmit={handleSubmit} className="space-y-6">
 
-                {/* Input para el nombre del hospital */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="Nombre del hospital"
-                    value={nombreHospital}
-                    onChange={(e) => setNombreHospital(e.target.value)}
-                    required
-                />
-                
-                {/* Input para la dirección del hospital */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="Dirección"
-                    value={direccion}
-                    onChange={(e) => setDireccion(e.target.value)}
-                    required
-                />
-
-                {/* Input para el NIT del hospital */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="NIT"
-                    value={nit}
-                    onChange={(e) => setNit(e.target.value)}
-                    required
-                />
-
-                {/* Input para el nombre del responsable */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="Nombre del Responsable"
-                    value={responsableNombre}
-                    onChange={(e) => setResponsableNombre(e.target.value)}
-                    required
-                />
-                
-                {/* Input para el documento del responsable */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="Documento del Responsable"
-                    value={responsableDocumento}
-                    onChange={(e) => setResponsableDocumento(e.target.value)}
-                    required
-                />
-                
-                {/* Input para el cargo del responsable */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="text"
-                    placeholder="Cargo del Responsable"
-                    value={cargo}
-                    onChange={(e) => setCargo(e.target.value)}
-                    required
-                />
-                
-                {/* Input para la capacidad de urgencias */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="number"
-                    placeholder="Capacidad Urgencias"
-                    value={capacidadUrgencias}
-                    onChange={onChangeCapacidad}
-                    min="0"
-                    required
-                />
-                
-                {/* Input para la contraseña del responsable */}
-                <input
-                    className="sm:border-2 border-solid border-black flex flex-col items-center m-0"
-                    type="password"
-                    placeholder="Contraseña"
-                    value={contrasena}
-                    onChange={(e) => setContrasena(e.target.value)}
-                    required
-                />
-
-                {/* Sección para agregar EPS */}
-                <div className="sm:border-2 border-solid border-black flex flex-col items-center p-5">
+                    {/* Input para el nombre del hospital */}
                     <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
                         type="text"
-                        placeholder="Nueva EPS"
-                        value={nuevaEps}
-                        onChange={(e) => setNuevaEps(e.target.value)}
+                        placeholder="Nombre del hospital"
+                        value={nombreHospital}
+                        onChange={(e) => setNombreHospital(e.target.value)}
+                        required
                     />
-                    <button type="button" onClick={agregarEps}>
-                        ➕ Añadir EPS
+
+                    {/* Input para la dirección del hospital */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="text"
+                        placeholder="Dirección"
+                        value={direccion}
+                        onChange={(e) => setDireccion(e.target.value)}
+                        required
+                    />
+
+                    {/* Input para el NIT del hospital */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="text"
+                        placeholder="NIT"
+                        value={nit}
+                        onChange={(e) => setNit(e.target.value)}
+                        required
+                    />
+
+                    {/* Input para el nombre del responsable */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="text"
+                        placeholder="Nombre del Responsable"
+                        value={responsableNombre}
+                        onChange={(e) => setResponsableNombre(e.target.value)}
+                        required
+                    />
+
+                    {/* Input para el documento del responsable */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="text"
+                        placeholder="Documento del Responsable"
+                        value={responsableDocumento}
+                        onChange={(e) => setResponsableDocumento(e.target.value)}
+                        required
+                    />
+
+                    {/* Input para el cargo del responsable */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="text"
+                        placeholder="Cargo del Responsable"
+                        value={cargo}
+                        onChange={(e) => setCargo(e.target.value)}
+                        required
+                    />
+
+                    {/* Input para la capacidad de urgencias */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="number"
+                        placeholder="Capacidad Urgencias"
+                        value={capacidadUrgencias}
+                        onChange={onChangeCapacidad}
+                        min="0"
+                        required
+                    />
+
+                    {/* Input para la contraseña del responsable */}
+                    <input
+                        className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                        type="password"
+                        placeholder="Contraseña"
+                        value={contrasena}
+                        onChange={(e) => setContrasena(e.target.value)}
+                        required
+                    />
+
+                    {/* Sección para agregar EPS */}
+                    <div className="flex flex-col gap-4">
+                        <input
+                            className="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            type="text"
+                            placeholder="Nueva EPS"
+                            value={nuevaEps}
+                            onChange={(e) => setNuevaEps(e.target.value)}
+                        />
+                        <button
+                            type="button"
+                            onClick={agregarEps}
+                            className="bg-cyan-600 text-white py-2 px-4 rounded-lg hover:bg-cyan-700 transition"
+                        >
+
+
+                            🏥  Añadir EPS
+                        </button>
+
+                        {/* Muestra las EPS añadidas y permite eliminarlas */}
+                        {eps.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                                {eps.map((item, idx) => (
+                                    <span key={idx} className="bg-gray-200 p-2 rounded-lg flex items-center gap-2">
+                                        {item}
+                                        <button type="button" onClick={() => eliminarEps(idx)} className="text-red-600">
+                                            ❌
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Botón para enviar el formulario */}
+                    <button
+                        type="submit"
+                        className="w-full bg-cyan-600 text-white py-3 rounded-lg hover:bg-cyan-700 transition"
+                    >
+                        Registrar Hospital
                     </button>
-
-                    {/* Muestra las EPS añadidas y permite eliminarlas */}
-                    {eps.length > 0 && (
-                        <div>
-                            {eps.map((item, idx) => (
-                                <span key={idx}>
-                                    {item}
-                                    <button type="button" onClick={() => eliminarEps(idx)}>❌</button>
-                                </span>
-                            ))}
-                        </div>
-                    )}
-                </div>
-
-                {/* Botón para enviar el formulario */}
-                <button type="submit">Registrar Hospital</button>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };
 
-export default RegistroHospital;  // Exporta el componente `RegistroHospital`.
+export default RegistroHospital;

@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { ref, get, update } from "firebase/database";
 import { database } from "@/config/firebase";
 import { useRouter } from "next/navigation";
-import "./page.css";
 
 const InicioHospital = () => {
     const [hospitalData, setHospitalData] = useState({});
@@ -142,41 +141,51 @@ const InicioHospital = () => {
     }, [nombreHospital, router, mapsLoaded]);
 
     return (
-        <div className="dashboard-container">
-            <h2>Información del Hospital</h2>
+        <div className="container mx-auto p-4 bg-white shadow-lg rounded-lg">
+            <h2 className="text-3xl font-semibold text-cyan-600 mb-4">Información del Hospital</h2>
 
             {hospitalData.nombre ? (
                 <div className="info-section">
-                    <p><strong>Nombre del Hospital:</strong> {hospitalData.nombre}</p>
-                    <p><strong>Dirección:</strong> {hospitalData.direccion}</p>
-                    <p><strong>NIT:</strong> {hospitalData.nit}</p>
+                    <p className="text-lg font-medium text-gray-700 mb-2"><strong>Nombre del Hospital:</strong> {hospitalData.nombre}</p>
+                    <p className="text-lg font-medium text-gray-700 mb-2"><strong>Dirección:</strong> {hospitalData.direccion}</p>
+                    <p className="text-lg font-medium text-gray-700 mb-4"><strong>NIT:</strong> {hospitalData.nit}</p>
 
-                    <label>
-                        <strong>Capacidad Total en Urgencias:</strong>
+                    <label className="block mb-4 text-black">
+                        <strong className="text-lg">Capacidad Total en Urgencias:</strong>
                         <input
                             type="number"
                             value={editableCapacidad}
                             onChange={(e) => setEditableCapacidad(e.target.value)}
                             min="0"
+                            className="mt-2 p-2 w-full border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
-                        <button onClick={actualizarCapacidad}>
+                        <button
+                            onClick={actualizarCapacidad}
+                            className="mt-4 px-6 py-2 bg-cyan-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+                        >
                             Actualizar
                         </button>
                     </label>
 
-                    <div id="map" style={{ width: "100%", height: "400px" }}></div>
+                    <div id="map" className="w-full h-96 mb-4 rounded-lg shadow-lg"></div>
 
-                    <div className="botones-map">
-                        <button className="btn-mapa" onClick={ocultarMapa}>
+                    <div className="flex justify-between">
+                        <button
+                            className="px-6 py-2 bg-cyan-600 text-white rounded-lg hover:bg-gray-700 transition duration-300"
+                            onClick={ocultarMapa}
+                        >
                             Ocultar Mapa
                         </button>
-                        <button className="btn-mapa" onClick={dirigirseHospital}>
+                        <button
+                            className="px-6 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-600 transition duration-300"
+                            onClick={dirigirseHospital}
+                        >
                             Dirigirse al Hospital
                         </button>
                     </div>
                 </div>
             ) : (
-                <p>Cargando datos...</p>
+                <p className="text-cyan-600">Cargando datos...</p>
             )}
         </div>
     );

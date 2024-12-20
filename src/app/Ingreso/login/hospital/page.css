@@ -1,7 +1,4 @@
-
-
-
-/* Animaciones */
+/* 
 @keyframes fadeInLogin {
     from {
         opacity: 0;
@@ -15,4 +12,4 @@
 
 .login-container {
     animation: fadeInLogin 1s ease-in;
-}
+} */

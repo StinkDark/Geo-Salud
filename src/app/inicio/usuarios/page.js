@@ -109,39 +109,45 @@ const InicioUsuario = () => {
   }, []);
 
   return (
-    <div className="eps-container border-4 border-solid border-white m-20">
-      <h2 className="font-bold border-2 border-solid border-white text-2xl bg:gray flex justify-start">Selecciona tu EPS</h2>
+    <div className="eps-container border-4 border-solid border-gray-300 p-8 m-10 flex flex-col gap-6 bg-white rounded-lg shadow-lg animate-fadeInLogin duration-1000 ease-in">
+      {/* Título de la sección */}
+      <h2 className="font-bold text-2xl text-cyan-600 mb-6">Selecciona tu EPS</h2>
 
       {/* Selector de EPS dinámico */}
-      <label>
-        <strong className="font-bold bg:black">EPS:</strong>
-        <select onChange={handleEpsChange} value={epsSeleccionada}>
+      <label className="font-bold text-lg text-gray-700">
+        EPS:
+        <select
+          className="block w-full mt-2 p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
+          onChange={handleEpsChange}
+          value={epsSeleccionada}
+        >
           <option value="" disabled>Selecciona tu EPS</option>
-          {epsDisponibles.map(eps => (
+          {epsDisponibles.map((eps) => (
             <option key={eps} value={eps}>{eps}</option>
           ))}
         </select>
       </label>
 
       {/* Información de Hospitales */}
-      <div>
-        <h3 className="flex justify-start font-bold text-2xl">Información de Hospitales</h3>
+      <div className="gap-6">
+        <h3 className="font-bold text-xl text-gray-700 mb-4">Información de Hospitales</h3>
 
         {hospitales.length > 0 ? (
           hospitales.map((hospital) => (
-            <div key={hospital.nit}>
-              <div className="contenedor-datos-hospital mb-2">
-
-                <p className="font-bold text-xl"><strong className="font-bold m-2">Nombre:</strong> {hospital.nombre}</p>
-                <p><strong className="font-bold m-2"> Documento del Responsable:</strong> {hospital.responsable?.documento}</p>
-                <p><strong className="font-bold m-2">Cargo:</strong> {hospital.responsable?.cargo}</p>
-                <p><strong className="font-bold m-2">Dirección:</strong> {hospital.direccion}</p>
-                <p><strong className="font-bold m-2">Capacidad Urgencias:</strong> {hospital.capacidadUrgencias}</p>
-
+            <div key={hospital.nit} className="hospital-container p-6 border-2 border-solid border-gray-300 rounded-lg mb-6">
+              <div className="text-left text-gray-700">
+                <p className="text-xl mb-2"><strong>Nombre:</strong> {hospital.nombre}</p>
+                <p className="text-xl mb-2"><strong>Documento del Responsable:</strong> {hospital.responsable?.documento}</p>
+                <p className="text-xl mb-2"><strong>Cargo:</strong> {hospital.responsable?.cargo}</p>
+                <p className="text-xl mb-2"><strong>Dirección:</strong> {hospital.direccion}</p>
+                <p className="text-xl mb-2"><strong>Camillas de Urgencias disponible:</strong> {hospital.capacidadUrgencias}</p>
               </div>
-            
+
               {/* Botón para mostrar el mapa */}
-              <button onClick={() => handleMostrarMapa(hospital.documento)}>
+              <button
+                className="bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-cyan-700 transition duration-300 mt-4"
+                onClick={() => handleMostrarMapa(hospital.documento)}
+              >
                 {mostrarMapa === hospital.documento ? "Ocultar Mapa" : "Mostrar Mapa"}
               </button>
 
@@ -149,21 +155,23 @@ const InicioUsuario = () => {
               {mostrarMapa === hospital.documento && (
                 <>
                   <iframe
+                    className="w-full h-64 my-4 rounded-lg shadow-lg"
                     title={`Mapa ${hospital.nombre}`}
-                    width="600"
-                    height="450"
                     loading="lazy"
                     src={generarUrlMapa(hospital)}
                   />
                   <a
+
                     href={`https://www.google.com/maps/search/?api=1&query=${hospital.coordenadas?.lat},${hospital.coordenadas?.lng}`}
                     target="_blank"
+                    rel="noopener noreferrer"
+                    className="block mt-4 bg-black text-white font-bold py-2 px-4 rounded-lg text-center hover:bg-cyan-700 transition duration-300"
                   >
                     Dirigirse a este hospital
                   </a>
+
                 </>
               )}
-              <hr />
             </div>
           ))
         ) : (

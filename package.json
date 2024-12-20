@@ -12,7 +12,7 @@
     "@react-google-maps/api": "^2.20.3",
     "axios": "^1.7.9",
     "ESLint": "npm:eslint@^8.57.1",
-    "firebase": "^11.0.2",
+    "firebase": "^11.1.0",
     "leaflet": "^1.9.4",
     "next": "^15.1.2",
     "react": "^18.3.1",
