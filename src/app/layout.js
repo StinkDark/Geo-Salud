@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     /* Nota importante: en Tailwind.css los bordes se colocan dentro del className de cada etiqueta y comienzan con la palabra: border, 
-       ejemplo: border-2 border-solid border-white. Cuando desee eliminarlos diríjase al className donde se encuentren y bórralos */
+       ejemplo: border-2 border-solid border-white. Cuando desee eliminarlos diríjase al className donde se encuentren y bórrelos */
 
     <html lang="en">
       <body
